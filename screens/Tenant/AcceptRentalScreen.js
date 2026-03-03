@@ -50,7 +50,7 @@ const AcceptRentalScreen = ({ navigation, route }) => {
 
   const fotosArray = fotos ? JSON.parse(fotos) : [];
   const imageUrls = fotosArray.map(
-    (foto) => `https://backend-arriendos-production.up.railway.app/images/${foto}`
+    (foto) => `https://backend-arriendos-v2-production.up.railway.app/images/${foto}`
   );
 
   return (

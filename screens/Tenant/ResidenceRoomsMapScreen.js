@@ -9,7 +9,7 @@ import {
 import Header from "../../components/Header";
 import styles from "../../styles/RegisterPropertyScreenStyles";
 
-const API_URL = "https://backend-arriendos-production.up.railway.app";
+const API_URL = "https://backend-arriendos-v2-production.up.railway.app";
 
 
 const ResidenceRoomsMapScreen = ({ route, navigation }) => {

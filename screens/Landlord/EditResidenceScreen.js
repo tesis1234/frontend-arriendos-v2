@@ -132,7 +132,7 @@ const EditResidenceScreen = ({ route, navigation }) => {
     const fetchResidenceData = async () => {
       try {
         const response = await axios.get(
-          `https://backend-arriendos-production.up.railway.app/api/auth/residences/${residenceId}`
+          `https://backend-arriendos-v2-production.up.railway.app/api/auth/residences/${residenceId}`
         );
         const residenceData = Array.isArray(response.data)
           ? response.data[0]
@@ -218,7 +218,7 @@ const EditResidenceScreen = ({ route, navigation }) => {
 
           if (fotosArray.length > 0) {
             const formattedImages = fotosArray.map((nombre) => ({
-              uri: `https://backend-arriendos-production.up.railway.app/images/${nombre}`,
+              uri: `https://backend-arriendos-v2-production.up.railway.app/images/${nombre}`,
               name: nombre,
               isNew: false,
             }));
@@ -378,7 +378,7 @@ const EditResidenceScreen = ({ route, navigation }) => {
   // Método para enviar la petición de actualización
   const sendUpdateRequest = async (formData) => {
     const response = await fetch(
-      `https://backend-arriendos-production.up.railway.app/api/auth/residences/${residenceId}`,
+      `https://backend-arriendos-v2-production.up.railway.app/api/auth/residences/${residenceId}`,
       {
         method: "PUT",
         headers: { Accept: "application/json" },
@@ -438,7 +438,7 @@ const EditResidenceScreen = ({ route, navigation }) => {
       return;
     }
 
-    const url = `https://backend-arriendos-production.up.railway.app/geocode?q=${encodeURIComponent(
+    const url = `https://backend-arriendos-v2-production.up.railway.app/geocode?q=${encodeURIComponent(
       text + ", Riobamba, Ecuador"
     )}`;
     try {

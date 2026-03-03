@@ -20,7 +20,7 @@ import { Ionicons } from "@expo/vector-icons";
 import * as DocumentPicker from "expo-document-picker";
 import axios from "axios";
 
-const API_BASE = "https://backend-arriendos-production.up.railway.app";
+const API_BASE = "https://backend-arriendos-v2-production.up.railway.app";
 
 export default function ContractScreen({ navigation, route }) {
   const { id } = route?.params || {};
@@ -63,7 +63,7 @@ export default function ContractScreen({ navigation, route }) {
 
   // -------- DESCARGAR PLANTILLA --------
   const downloadTemplate = () => {
-    const url = "https://backend-arriendos-production.up.railway.app/api/arriendos/template";
+    const url = "https://backend-arriendos-v2-production.up.railway.app/api/arriendos/template";
     Linking.openURL(url).catch(() =>
       Alert.alert("Error", "No se pudo abrir la plantilla.")
     );

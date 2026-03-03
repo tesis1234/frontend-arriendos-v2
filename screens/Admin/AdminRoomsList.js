@@ -67,7 +67,7 @@ const AdminRoomsList = ({ navigation, route }) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://backend-arriendos-production.up.railway.app/api/auth/rooms/by-residence/${residenceId}`
+        `https://backend-arriendos-v2-production.up.railway.app/api/auth/rooms/by-residence/${residenceId}`
       );
       setRooms(response.data || []);
     } catch (error) {
@@ -194,7 +194,7 @@ const AdminRoomsList = ({ navigation, route }) => {
                       {(() => {
                         const fotosArray = JSON.parse(room.fotos || "[]");
                         const imageUrls = fotosArray.map(
-                          (foto) => `https://backend-arriendos-production.up.railway.app/images/${foto}`
+                          (foto) => `https://backend-arriendos-v2-production.up.railway.app/images/${foto}`
                         );
                         const currentIndex = imageIndices[index] || 0;
 

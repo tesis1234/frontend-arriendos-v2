@@ -104,7 +104,7 @@ const TenantViewScreen = ({ navigation }) => {
       console.log("Usuario actual:", user);
 
       const response = await axios.get(
-        "https://backend-arriendos-production.up.railway.app/api/auth/all-properties"
+        "https://backend-arriendos-v2-production.up.railway.app/api/auth/all-properties"
       );
 
       if (response.data.length > 0) {
@@ -718,7 +718,7 @@ const TenantViewScreen = ({ navigation }) => {
                               );
                               const imageUrls = fotosArray.map(
                                 (foto) =>
-                                  `https://backend-arriendos-production.up.railway.app/images/${foto}`
+                                  `https://backend-arriendos-v2-production.up.railway.app/images/${foto}`
                               );
                               const currentIndex = imageIndices[index] || 0;
 

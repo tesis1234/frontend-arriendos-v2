@@ -71,7 +71,7 @@ const LandlordViewScreen = ({ navigation }) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://backend-arriendos-production.up.railway.app/api/auth/departments?userId=${user?.id}`
+        `https://backend-arriendos-v2-production.up.railway.app/api/auth/departments?userId=${user?.id}`
       );
       if (response.data.length > 0) {
         setDepartments(response.data);
@@ -95,7 +95,7 @@ const LandlordViewScreen = ({ navigation }) => {
   const deleteDepartment = async (departmentId) => {
     try {
       const response = await axios.delete(
-        `https://backend-arriendos-production.up.railway.app/api/auth/departments/${departmentId}`
+        `https://backend-arriendos-v2-production.up.railway.app/api/auth/departments/${departmentId}`
       );
       if (response.status === 200) {
         setDepartments((prev) =>
@@ -312,7 +312,7 @@ const LandlordViewScreen = ({ navigation }) => {
                       {(() => {
                         const fotosArray = JSON.parse(department.fotos || "[]");
                         const imageUrls = fotosArray.map(
-                          (foto) => `https://backend-arriendos-production.up.railway.app/images/${foto}`
+                          (foto) => `https://backend-arriendos-v2-production.up.railway.app/images/${foto}`
                         );
                         const currentIndex = imageIndices[index] || 0;
 

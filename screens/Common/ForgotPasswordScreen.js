@@ -32,7 +32,7 @@ export default function ForgotPasswordScreen({ navigation }) {
 
   const sendResetRequest = async (payload) => {
     const response = await fetch(
-      "https://backend-arriendos-production.up.railway.app/api/auth/reset-password",
+      "https://backend-arriendos-v2-production.up.railway.app/api/auth/reset-password",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -43,28 +43,39 @@ export default function ForgotPasswordScreen({ navigation }) {
   };
 
   const handlePasswordReset = async () => {
-    if (!validateEmail()) return;
-    const payload = buildResetPayload();
-    const data = await sendResetRequest(payload);
+    try {
+      if (!validateEmail()) return;
 
-    alert("Correo enviado", data.message);
+      const payload = buildResetPayload();
+      const data = await sendResetRequest(payload);
+
+      if (data.success) {
+        Alert.alert("Éxito", data.message || "Correo enviado correctamente");
+        navigation.goBack();
+      } else {
+        Alert.alert("Error", data.message || "No se pudo enviar el correo");
+      }
+    } catch (error) {
+      Alert.alert("Error", "Error al conectar con el servidor");
+    }
   };
 
+
   return (
-    
+
     <View style={styles.container}>
       {/* ENCABEZADO */}
-    <View style={{
-      height: 70,
-      width: "100%",
-      flexDirection: "row"
-    }}>
-      <View style={{ flex: 1, backgroundColor: "#B80000" }} />   
-      <View style={{ flex: 1, backgroundColor: "#ffffff" }} />
-      <View style={{ flex: 1, backgroundColor: "#006400" }} />
-    </View>
+      <View style={{
+        height: 70,
+        width: "100%",
+        flexDirection: "row"
+      }}>
+        <View style={{ flex: 1, backgroundColor: "#B80000" }} />
+        <View style={{ flex: 1, backgroundColor: "#ffffff" }} />
+        <View style={{ flex: 1, backgroundColor: "#006400" }} />
+      </View>
       <Header navigation={navigation} isLoggedIn={false} />
-      
+
       <View style={styles.content}>
         <Image
           source={require("../../assets/recovery-icon.png")}

@@ -31,7 +31,7 @@ export default function AdminEditUser({ navigation, route }) {
     const fetchUser = async () => {
       try {
         const res = await fetch(
-          `https://backend-arriendos-production.up.railway.app/api/auth/usuarios/${userId}`
+          `https://backend-arriendos-v2-production.up.railway.app/api/auth/usuarios/${userId}`
         );
         const data = await res.json();
 
@@ -64,7 +64,7 @@ export default function AdminEditUser({ navigation, route }) {
   useEffect(() => {
     const fetchBanks = async () => {
       try {
-        const res = await fetch("https://backend-arriendos-production.up.railway.app/api/bancos");
+        const res = await fetch("https://backend-arriendos-v2-production.up.railway.app/api/bancos");
         const data = await res.json();
         setBanks(data);
       } catch (err) {
@@ -99,7 +99,7 @@ export default function AdminEditUser({ navigation, route }) {
       console.log("📌 Enviando body:", body);
 
       const res = await fetch(
-        `https://backend-arriendos-production.up.railway.app/api/admin/usuarios/${userId}`,
+        `https://backend-arriendos-v2-production.up.railway.app/api/admin/usuarios/${userId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

@@ -69,7 +69,7 @@ export default function ProfileScreen({ navigation }) {
     const fetchUserData = async () => {
       try {
         const response = await fetch(
-          `https://backend-arriendos-production.up.railway.app/api/auth/usuarios/${user?.id}`
+          `https://backend-arriendos-v2-production.up.railway.app/api/auth/usuarios/${user?.id}`
         );
         const data = await response.json();
 
@@ -125,7 +125,7 @@ export default function ProfileScreen({ navigation }) {
   useEffect(() => {
     const cargarBancos = async () => {
       try {
-        const response = await fetch("https://backend-arriendos-production.up.railway.app/api/bancos");
+        const response = await fetch("https://backend-arriendos-v2-production.up.railway.app/api/bancos");
         const data = await response.json();
         setBancos(data);
         setFiltrados(data);
@@ -341,7 +341,7 @@ export default function ProfileScreen({ navigation }) {
       }
 
       const response = await fetch(
-        `https://backend-arriendos-production.up.railway.app/api/auth/usuarios/${user?.id}`,
+        `https://backend-arriendos-v2-production.up.railway.app/api/auth/usuarios/${user?.id}`,
         {
           method: "PUT",
           headers,
@@ -394,7 +394,7 @@ export default function ProfileScreen({ navigation }) {
                     ? { uri: profileImage.uri }
                     : userData.foto_perfil
                       ? {
-                        uri: `https://backend-arriendos-production.up.railway.app/images/${userData.foto_perfil}`,
+                        uri: `https://backend-arriendos-v2-production.up.railway.app/images/${userData.foto_perfil}`,
                       }
                       : require("../../assets/user-icon.png")
                 }

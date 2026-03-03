@@ -265,7 +265,7 @@ const AdminEditRoom = ({ navigation, route }) => {
       }
 
       const formattedImages = fotos.map((nombre) => ({
-        uri: `https://backend-arriendos-production.up.railway.app/images/${nombre}`,
+        uri: `https://backend-arriendos-v2-production.up.railway.app/images/${nombre}`,
         name: nombre,
         isNew: false,
       }));
@@ -572,7 +572,7 @@ const AdminEditRoom = ({ navigation, route }) => {
       const formData = await buildFormData();
 
       const response = await fetch(
-        `https://backend-arriendos-production.up.railway.app/api/auth/rooms/${roomId}`,
+        `https://backend-arriendos-v2-production.up.railway.app/api/auth/rooms/${roomId}`,
         {
           method: "PUT",
           body: formData,

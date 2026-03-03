@@ -114,7 +114,7 @@ const RegisterPropertyScreen = ({ navigation }) => {
       return;
     }
 
-    const url = `https://backend-arriendos-production.up.railway.app/geocode?q=${encodeURIComponent(
+    const url = `https://backend-arriendos-v2-production.up.railway.app/geocode?q=${encodeURIComponent(
       text + ", Riobamba, Ecuador"
     )}`;
     try {
@@ -552,7 +552,7 @@ const RegisterPropertyScreen = ({ navigation }) => {
 
   const submitPropertyData = async (formData) => {
     const response = await fetch(
-      "https://backend-arriendos-production.up.railway.app/api/auth/register-property",
+      "https://backend-arriendos-v2-production.up.railway.app/api/auth/register-property",
       {
         method: "POST",
         body: formData,

@@ -72,7 +72,7 @@ const RegisterRoomScreen = ({ navigation, route }) => {
         // Si no llegan por route.params, busca desde la API
         if (!totalResidencia || !totalHabitaciones) {
           const res = await fetch(
-            `https://backend-arriendos-production.up.railway.app/api/residencias/${idPropiedad}`
+            `https://backend-arriendos-v2-production.up.railway.app/api/residencias/${idPropiedad}`
           );
           const data = await res.json();
 
@@ -480,7 +480,7 @@ const RegisterRoomScreen = ({ navigation, route }) => {
         }
       }
       const response = await fetch(
-        "https://backend-arriendos-production.up.railway.app/api/auth/register-room",
+        "https://backend-arriendos-v2-production.up.railway.app/api/auth/register-room",
         {
           method: "POST",
           body: formData,

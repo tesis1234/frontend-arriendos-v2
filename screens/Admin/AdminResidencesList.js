@@ -48,7 +48,7 @@ export default function AdminResidencesList({ navigation }) {
   const loadResidences = async () => {
     try {
       const response = await axios.get(
-        "https://backend-arriendos-production.up.railway.app/api/admin/residences"
+        "https://backend-arriendos-v2-production.up.railway.app/api/admin/residences"
       );
       setResidences(response.data);
     } catch (error) {
@@ -85,7 +85,7 @@ export default function AdminResidencesList({ navigation }) {
       {residences.map((residence, index) => {
         const fotosArray = JSON.parse(residence.fotos || "[]");
         const imageUrls = fotosArray.map(
-          (foto) => `https://backend-arriendos-production.up.railway.app/images/${foto}`
+          (foto) => `https://backend-arriendos-v2-production.up.railway.app/images/${foto}`
         );
         const currentIndex = imageIndices[index] || 0;
 

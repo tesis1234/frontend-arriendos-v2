@@ -1,117 +1,78 @@
+// components/Header.js
 import React, { useContext } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Alert,
-  Platform,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Alert, Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../constants/colors";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { AuthContext } from "../context/AuthContext";
 
-export default function Header({ isLoggedIn = false }) {
+export default function Header({
+  isLoggedIn = false,
+  onLoginPress,
+  onRegisterPress,
+}) {
   const navigation = useNavigation();
   const route = useRoute();
   const { user, setUser } = useContext(AuthContext);
 
-  const currentScreen = route.name;
-
-  // 🔥 Modo admin según la pantalla actual
+  const currentScreen = route?.name || "Home";
   const isAdminScreen = currentScreen.startsWith("Admin");
 
-  // Solo mostramos botones de login/register en Home, sin sesión y NO en admin
-  const showAuthButtons =
-    currentScreen === "Home" && !isLoggedIn && !isAdminScreen;
-
-  // Icono de perfil: solo si está logueado, NO es admin y no está en Login/Register
-  const showProfileIcon =
-    isLoggedIn &&
-    !isAdminScreen &&
-    currentScreen !== "Login" &&
-    currentScreen !== "Register";
+  // Solo en Home, sin sesión, no admin
+  const showAuthButtons = currentScreen === "Home" && !user && !isAdminScreen;
 
   const handleLogout = () => {
     if (Platform.OS === "web") {
-      const confirmed = window.confirm(
-        "¿Estás seguro de que quieres cerrar sesión?"
-      );
-      if (confirmed) {
-        setUser(null);
-      }
+      const confirmed = window.confirm("¿Estás seguro de que quieres cerrar sesión?");
+      if (confirmed) setUser(null);
     } else {
-      Alert.alert(
-        "Cerrar sesión",
-        "¿Estás seguro de que quieres cerrar sesión?",
-        [
-          { text: "Cancelar", style: "cancel" },
-          {
-            text: "Cerrar sesión",
-            style: "destructive",
-            onPress: () => setUser(null),
-          },
-        ],
-        { cancelable: true }
-      );
+      Alert.alert("Cerrar sesión", "¿Estás seguro de que quieres cerrar sesión?", [
+        { text: "Cancelar", style: "cancel" },
+        { text: "Cerrar sesión", style: "destructive", onPress: () => setUser(null) },
+      ]);
     }
   };
 
-  // 🔹 Comportamiento del botón Home
   const goHome = () => {
-    // Si estoy en pantallas de admin → siempre al dashboard del admin
-    if (isAdminScreen) {
-      navigation.navigate("AdminDashboard");
-      return;
-    }
+    if (isAdminScreen) return navigation.navigate("AdminDashboard");
 
-    // Resto de casos (como lo tenías antes)
-    if (!user) {
-      navigation.navigate("Home");
-    } else if (user.role === "landlord") {
-      navigation.navigate("RegisterProperty");
-    } else {
-      navigation.navigate("Tenant");
-    }
+    if (!user) return navigation.navigate("Home");
+    if (user.role === "landlord") return navigation.navigate("RegisterProperty");
+    return navigation.navigate("Tenant");
   };
 
   return (
     <View style={styles.header}>
-      {/* Icono Home */}
+      {/* Home */}
       <TouchableOpacity onPress={goHome}>
         <Ionicons name="home" size={28} color={colors.primary} />
       </TouchableOpacity>
 
       <View style={styles.right}>
-        {/* Botones Ingresar / Registrarse (solo no admin) */}
+        {/* ✅ Login/Register deben ABRIR MODAL (si mandas props) */}
         {showAuthButtons && (
           <>
             <TouchableOpacity
               style={[styles.button, styles.login]}
-              onPress={() => navigation.navigate("Login")}
+              onPress={() => (onLoginPress ? onLoginPress() : navigation.navigate("Login"))}
             >
               <Text style={styles.text}>Ingresar</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={[styles.button, styles.register]}
-              onPress={() => navigation.navigate("Register")}
+              onPress={() => (onRegisterPress ? onRegisterPress() : navigation.navigate("Register"))}
             >
               <Text style={styles.text}>Registrarse</Text>
             </TouchableOpacity>
           </>
         )}
 
-        {/* Icono de perfil + logout (solo no admin) */}
-        {showProfileIcon && (
+        {/* Perfil + Logout */}
+        {!!user && !isAdminScreen && (
           <>
             <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-              <Ionicons
-                name="person-circle-outline"
-                size={32}
-                color={colors.primary}
-              />
+              <Ionicons name="person-circle-outline" size={32} color={colors.primary} />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={handleLogout} style={{ marginLeft: 10 }}>
@@ -120,8 +81,8 @@ export default function Header({ isLoggedIn = false }) {
           </>
         )}
 
-        {/* Logout solo para admin (sin icono de perfil) */}
-        {isLoggedIn && isAdminScreen && (
+        {/* Logout admin */}
+        {!!user && isAdminScreen && (
           <TouchableOpacity onPress={handleLogout}>
             <Ionicons name="log-out-outline" size={28} color="red" />
           </TouchableOpacity>
@@ -147,18 +108,11 @@ const styles = StyleSheet.create({
   },
   button: {
     marginLeft: 10,
-    paddingVertical: 5,
+    paddingVertical: 6,
     paddingHorizontal: 12,
-    borderRadius: 5,
+    borderRadius: 6,
   },
-  register: {
-    backgroundColor: "#f6a700",
-  },
-  login: {
-    backgroundColor: "#000",
-  },
-  text: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
+  register: { backgroundColor: "#f6a700" },
+  login: { backgroundColor: "#000" },
+  text: { color: "#fff", fontWeight: "bold" },
 });

@@ -37,7 +37,7 @@ export default function AdminUsersList({ navigation }) {
   const cargarUsuarios = async () => {
     try {
       const response = await axios.get(
-        "https://backend-arriendos-production.up.railway.app/api/admin/usuarios"
+        "https://backend-arriendos-v2-production.up.railway.app/api/admin/usuarios"
       );
       setUsers(response.data);
       setFilteredUsers(response.data);
@@ -163,7 +163,7 @@ export default function AdminUsersList({ navigation }) {
                 ]}
                 onPress={async () => {
                   await axios.put(
-                    `https://backend-arriendos-production.up.railway.app/api/admin/usuarios/${user.id_usuario}/estado`,
+                    `https://backend-arriendos-v2-production.up.railway.app/api/admin/usuarios/${user.id_usuario}/estado`,
                     { estado: user.estado === "activo" ? "inactivo" : "activo" }
                   );
                   cargarUsuarios();

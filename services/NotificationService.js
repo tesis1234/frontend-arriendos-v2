@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 
-const API_BASE_URL = 'https://backend-arriendos-production.up.railway.app';
+const API_BASE_URL = 'https://backend-arriendos-v2-production.up.railway.app';
 
 // Configuración de notificaciones para móvil
 Notifications.setNotificationHandler({
@@ -42,7 +42,7 @@ class NotificationService {
       const notificationData = {
         recipientId: propertyOwnerId,
         senderId: tenantInfo.id,
-        type: 'rental_request',
+        type: 'arriendo',
         title: 'Nueva solicitud de alquiler',
         message: `${tenantInfo.nombres} ${tenantInfo.apellidos} está interesado en tu propiedad "${propertyInfo.titulo}"`,
         data: {

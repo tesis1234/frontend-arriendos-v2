@@ -59,7 +59,7 @@ const TenantRoomViewScreen = ({ navigation, route }) => {
     const checkRentalStatus = async () => {
       try {
         const response = await axios.get(
-          "https://backend-arriendos-production.up.railway.app/api/solicitudes/check-room",
+          "https://backend-arriendos-v2-production.up.railway.app/api/solicitudes/check-room",
           {
             params: {
               id_estudiante: user.id,
@@ -86,7 +86,7 @@ const TenantRoomViewScreen = ({ navigation, route }) => {
 
   const fotosArray = fotos ? JSON.parse(fotos) : [];
   const imageUrls = fotosArray.map(
-    (foto) => `https://backend-arriendos-production.up.railway.app/images/${foto}`
+    (foto) => `https://backend-arriendos-v2-production.up.railway.app/images/${foto}`
   );
 
   const handleRentalRequest = async () => {
@@ -97,7 +97,7 @@ const TenantRoomViewScreen = ({ navigation, route }) => {
     try {
       // ✅ Verificar si ya existe una solicitud
       const checkResponse = await axios.get(
-        "https://backend-arriendos-production.up.railway.app/api/solicitudes/check-room",
+        "https://backend-arriendos-v2-production.up.railway.app/api/solicitudes/check-room",
         {
           params: {
             id_estudiante: user.id,
@@ -115,7 +115,7 @@ const TenantRoomViewScreen = ({ navigation, route }) => {
 
       // ✅ Crear la solicitud
       const requestResponse = await axios.post(
-        "https://backend-arriendos-production.up.railway.app/api/solicitudes",
+        "https://backend-arriendos-v2-production.up.railway.app/api/solicitudes",
         {
           id_estudiante: user.id,
           id_propiedad: route.params.residenceId,
@@ -126,13 +126,13 @@ const TenantRoomViewScreen = ({ navigation, route }) => {
       if (requestResponse.status === 201) {
         // ✅ Obtener datos del propietario
         const propertyResponse = await axios.get(
-          `https://backend-arriendos-production.up.railway.app/api/auth/properties/${route.params.residenceId}`
+          `https://backend-arriendos-v2-production.up.railway.app/api/auth/properties/${route.params.residenceId}`
         );
 
         const propertyData = propertyResponse.data;
 
         // Enviar notificación al propietario
-        await axios.post("https://backend-arriendos-production.up.railway.app/api/notifications/send", {
+        await axios.post("https://backend-arriendos-v2-production.up.railway.app/api/notifications/send", {
           recipientId: propertyData.id_propietario,
           senderId: user.id,
           type: "arriendo",

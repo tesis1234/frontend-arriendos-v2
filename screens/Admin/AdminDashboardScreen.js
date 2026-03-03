@@ -31,9 +31,9 @@ const AdminDashboardScreen = ({ navigation }) => {
   const fetchDashboardData = async () => {
     try {
       const [usuariosRes, propiedadesRes, arriendosRes] = await Promise.all([
-        axios.get("https://backend-arriendos-production.up.railway.app/api/admin/usuarios/count"),
-        axios.get("https://backend-arriendos-production.up.railway.app/api/admin/propiedades/count"),
-        axios.get("https://backend-arriendos-production.up.railway.app/api/admin/arriendos/count"),
+        axios.get("https://backend-arriendos-v2-production.up.railway.app/api/admin/usuarios/count"),
+        axios.get("https://backend-arriendos-v2-production.up.railway.app/api/admin/propiedades/count"),
+        axios.get("https://backend-arriendos-v2-production.up.railway.app/api/admin/arriendos/count"),
       ]);
 
       const usuarios = usuariosRes.data.total || 0;
@@ -44,7 +44,7 @@ const AdminDashboardScreen = ({ navigation }) => {
       
       const ocupacion = propiedadesRes.data.ocupacion || 0;
       const usuariosMesRes = await axios.get(
-        "https://backend-arriendos-production.up.railway.app/api/admin/usuarios/por-mes"
+        "https://backend-arriendos-v2-production.up.railway.app/api/admin/usuarios/por-mes"
       );
       setUsuariosPorMes(usuariosMesRes.data);
 

@@ -164,7 +164,7 @@ export default function RegisterScreen({ navigation }) {
     });
   };
   const sendRegisterRequest = async (payload) => {
-    const response = await fetch("https://backend-arriendos-production.up.railway.app/api/auth/register", {
+    const response = await fetch("https://backend-arriendos-v2-production.up.railway.app/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: payload,
@@ -217,7 +217,7 @@ export default function RegisterScreen({ navigation }) {
   useEffect(() => {
     const cargarBancos = async () => {
       try {
-        const response = await fetch("https://backend-arriendos-production.up.railway.app/api/bancos");
+        const response = await fetch("https://backend-arriendos-v2-production.up.railway.app/api/bancos");
         const data = await response.json();
         setBancos(data);
         setFiltrados(data);
